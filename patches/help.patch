@@ -1,0 +1,12 @@
+--- ../mainWindowCopy.cpp	2024-01-02 21:49:59.121414806 +0100
++++ ../mainWindow.cpp	2024-01-03 10:09:54.116692883 +0100
+@@ -915,7 +915,8 @@
+ /* HELP MENU */
+ void mainWindow::help()
+ {
+-    QDesktopServices::openUrl(QUrl("file:help/help.html" ));
++    const QString rootPath = QString::fromUtf8(std::getenv("HELP_ROOT"));
++    QDesktopServices::openUrl(QUrl("file:" + rootPath));
+ }
+ 
+ void mainWindow::whatsThis()

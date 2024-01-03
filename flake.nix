@@ -10,6 +10,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
         pkgs = import nixpkgs { inherit system; };
+
         pname = "Katana-MK2-FxFloorBoard";
 
         fxfloorboard =
@@ -32,8 +33,24 @@
             };
 
             buildInputs = [ qtbase unzip alsa-lib bluez qtconnectivity ];
-            nativeBuildInputs = [ wrapQtAppsHook qmake ];
-            installPhase = "install -D packager/Katana-MK2-FxFloorBoard -t $out/bin/";
+            nativeBuildInputs = [
+              wrapQtAppsHook
+              qmake
+            ];
+            qtWrapperArgs = [ ''--set HELP_ROOT ${placeholder "out"}/bin/help/help.html'' ];
+            installPhase = ''
+              runHook preInstall
+
+              install -D packager/Katana-MK2-FxFloorBoard -t $out/bin/
+              install -Dm644 packager/help/help.html -t $out/bin/help/
+              install -Dm644 packager/help/help_files/* -t $out/bin/help/help_files
+
+              runHook postInstall
+            '';
+            patches = [
+              ./patches/help.patch
+            ];
+
           };
 
       in
