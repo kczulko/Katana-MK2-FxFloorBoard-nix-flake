@@ -7,7 +7,7 @@ Nix flake recipe for Katana-MK2-FxFloorBoard
 ## Important notes
 
 Unfortunately, this build is not fully reproducible. There is no reproducible link for the sources which
-moreover are a bit behind the "oficial" releases. In the time of writing, sources are from 
+moreover are a bit behind the "official" releases. In the time of writing, sources are from 
 [06.08.2023](https://sourceforge.net/projects/fxfloorboard/files/KatanaFxFloorBoard/Katana%20FxFloorboard%20for%20MK2%20Desktop/)
 and can be overridden at any time.
 
